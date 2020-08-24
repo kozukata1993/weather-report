@@ -5,7 +5,6 @@ import { Register } from './component/register';
 const App: FC = () => {
   return (
     <Container>
-      <h1>Hello React!</h1>
       <Register />
     </Container>
   );
