@@ -25,8 +25,6 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    cy: 'readonly',
-    Cypress: 'readonly',
     __DEV__: true,
   },
   parser: '@typescript-eslint/parser',
@@ -34,7 +32,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: ['./tsconfig.json', './cypress/tsconfig.json'],
+    project: ['./tsconfig.json'],
     sourceType: 'module',
   },
   plugins: [
@@ -43,7 +41,6 @@ module.exports = {
     'jest',
     'jsx-a11y',
     'prefer-arrow',
-    'emotion',
     'prettier',
     'react',
     'react-hooks',
@@ -64,21 +61,6 @@ module.exports = {
       },
     ],
 
-    // for Cypress
-    'jest/expect-expect': ['off'],
-
-    // for Emotion
-    'emotion/jsx-import': 'error',
-    'emotion/no-vanilla': 'error',
-    'emotion/import-from-emotion': 'error',
-    'emotion/styled-import': 'error',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        varsIgnorePattern: '[Rr]eact',
-      },
-    ],
-
     // @typescript-eslint
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
@@ -86,7 +68,7 @@ module.exports = {
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
     '@typescript-eslint/no-empty-function': 'off',
-
+    '@typescript-eslint/no-unused-vars': 'error',
     // prefer-arrow
     'prefer-arrow/prefer-arrow-functions': [
       'error',
