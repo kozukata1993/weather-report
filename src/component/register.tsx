@@ -7,6 +7,7 @@ export const Register: FC = () => {
       <Header>Hello</Header>
       <Header>GitHub Actions Success!</Header>
       <Header>Layout完成</Header>
+      <Header>Cloud Functions作成</Header>
     </>
   );
 };
