@@ -20,16 +20,14 @@ export const forecast = functions
       });
 
       if (res) {
-        await admin
-          .firestore()
-          .collection(`${city.name}`)
-          .add({
-            date: admin.firestore.FieldValue.serverTimestamp(),
-            summary: res.data.hourly.summary,
-            temperatureMax: res.data.daily.data[0].temperatureMax,
-            temperatureMin: res.data.daily.data[0].temperatureMin,
-            icon: generateIcon(res.data.hourly.icon),
-          });
+        const icon = generateIcon(res.data.hourly.icon);
+        await admin.firestore().collection(`${city.name}`).add({
+          date: admin.firestore.FieldValue.serverTimestamp(),
+          summary: res.data.hourly.summary,
+          temperatureMax: res.data.daily.data[0].temperatureMax,
+          temperatureMin: res.data.daily.data[0].temperatureMin,
+          icon: icon,
+        });
       }
     });
   });
