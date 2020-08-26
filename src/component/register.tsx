@@ -4,10 +4,7 @@ import { Header } from 'semantic-ui-react';
 export const Register: FC = () => {
   return (
     <>
-      <Header>Hello</Header>
-      <Header>GitHub Actions Success!</Header>
-      <Header>Layout完成</Header>
-      <Header>Cloud Functions for Firebase </Header>
+      <Header>Register</Header>
     </>
   );
 };
