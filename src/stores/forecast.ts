@@ -1,31 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Dispatch } from '@reduxjs/toolkit';
+import { getForecasts } from '../firebase/firestore';
 
-// Stateの初期状態
-const initialState = {
+const initialForecast = {
   date: new Date(),
   summary: '',
   temperatureMax: 0,
   temperatureMin: 0,
-  icon: 'sun',
+  icon: 'question',
 };
 
-// Sliceを生成する
+const initialState = {
+  tokyo: initialForecast,
+  osaka: initialForecast,
+  nagoya: initialForecast,
+  morioka: initialForecast,
+};
+
 const forecastSlice = createSlice({
   name: 'forecast',
   initialState,
   reducers: {
-    setName: (state, action) => {
-      return { ...state, name: action.payload };
+    setForecast: (prevState, action) => {
+      return { ...initialState, ...prevState, ...action.payload };
     },
-    clearName: (state) => {
-      return { ...state, name: '' };
-    },
-    // etc...
+    resetForecast: () => initialState,
   },
 });
 
-// Reducerをエクスポートする
+export const { setForecast, resetForecast } = forecastSlice.actions;
 export const forecastReducer = forecastSlice.reducer;
 
-// Action Creatorsをエクスポートする
-export const { setName, clearName } = forecastSlice.actions;
+export const fetchForecast = () => {
+  return async (dispatch: Dispatch) => {
+    const tokyoForecast = await getForecasts('tokyo');
+    const osakaForecast = await getForecasts('osaka');
+    const nagoyaForecast = await getForecasts('nagoya');
+    const moriokaForecast = await getForecasts('morioka');
+    dispatch(setForecast({ tokyo: tokyoForecast }));
+    dispatch(setForecast({ osaka: osakaForecast }));
+    dispatch(setForecast({ nagoya: nagoyaForecast }));
+    dispatch(setForecast({ morioka: moriokaForecast }));
+  };
+};
