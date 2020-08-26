@@ -26,3 +26,4 @@ todoList.md
 .runtimeconfig.json
 
 *debug.log
+.env
