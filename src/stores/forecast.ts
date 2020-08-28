@@ -22,6 +22,8 @@ const forecastSlice = createSlice({
   initialState,
   reducers: {
     setForecast: (prevState, action) => {
+      console.log('setForecast', action.payload);
+
       return { ...initialState, ...prevState, ...action.payload };
     },
     resetForecast: () => initialState,
