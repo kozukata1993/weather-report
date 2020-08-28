@@ -1,23 +1,30 @@
-import React, { FC } from 'react';
-import { Header, Button } from 'semantic-ui-react';
+import React, { FC, useEffect } from 'react';
+import { Header, Grid } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ForecastCard } from './forecastCard';
 import { fetchForecast } from '../stores/forecast';
 import { Store } from '../interface';
 
 export const Forecast: FC = () => {
-  const forecasts = useSelector((store: Store) => store.forecasts);
   const dispatch = useDispatch();
 
-  const handleClick = async () => {
-    console.log('start');
+  useEffect(() => {
     dispatch(fetchForecast());
-    console.log(forecasts);
-  };
+  }, [dispatch]);
+  const forecasts = useSelector((store: Store) => store.forecasts);
 
   return (
     <>
       <Header>Forecast</Header>
-      <Button color="instagram" content="Get Forecast" onClick={handleClick} />
+      <Grid columns="equal">
+        {Object.entries(forecasts).map(([city, forecast]) => {
+          return (
+            <Grid.Column width={8}>
+              <ForecastCard key={forecast.id} city={city} forecast={forecast} />
+            </Grid.Column>
+          );
+        })}
+      </Grid>
     </>
   );
 };

@@ -6,13 +6,14 @@ export interface Store {
 }
 
 export interface StoreForecasts {
-  tokyo: Forecast;
-  osaka: Forecast;
-  nagoya: Forecast;
-  morioka: Forecast;
+  tokyo: StoreForecast;
+  osaka: StoreForecast;
+  nagoya: StoreForecast;
+  morioka: StoreForecast;
 }
 
-export interface Forecast {
+export interface StoreForecast {
+  id: string;
   date: Date;
   summary: string;
   temperatureMax: number;
