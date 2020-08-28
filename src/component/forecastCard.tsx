@@ -9,7 +9,7 @@ interface ForecastCardProps {
 
 export const ForecastCard: FC<ForecastCardProps> = ({ city, forecast }) => {
   return (
-    <Card.Group key={forecast.id}>
+    <Card.Group>
       <Card fluid>
         <Card.Content>
           <Card.Header>{city}</Card.Header>

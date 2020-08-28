@@ -10,7 +10,7 @@ const initialForecast = {
   icon: 'question',
 };
 
-const initialState = {
+export const initialState = {
   tokyo: initialForecast,
   osaka: initialForecast,
   nagoya: initialForecast,
