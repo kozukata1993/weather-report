@@ -1,7 +1,8 @@
 import { createSlice, Dispatch } from '@reduxjs/toolkit';
-import { getForecasts } from '../firebase/firestore';
+import { getForecast } from '../firebase/firestore';
 
 const initialForecast = {
+  id: '0',
   date: new Date(),
   summary: '',
   temperatureMax: 0,
@@ -32,10 +33,10 @@ export const forecastReducer = forecastSlice.reducer;
 
 export const fetchForecast = () => {
   return async (dispatch: Dispatch) => {
-    const tokyoForecast = await getForecasts('tokyo');
-    const osakaForecast = await getForecasts('osaka');
-    const nagoyaForecast = await getForecasts('nagoya');
-    const moriokaForecast = await getForecasts('morioka');
+    const tokyoForecast = await getForecast('tokyo');
+    const osakaForecast = await getForecast('osaka');
+    const nagoyaForecast = await getForecast('nagoya');
+    const moriokaForecast = await getForecast('morioka');
     dispatch(setForecast({ tokyo: tokyoForecast }));
     dispatch(setForecast({ osaka: osakaForecast }));
     dispatch(setForecast({ nagoya: nagoyaForecast }));
