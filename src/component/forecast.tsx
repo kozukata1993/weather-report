@@ -19,8 +19,8 @@ export const Forecast: FC = () => {
       <Grid columns="equal">
         {Object.entries(forecasts).map(([city, forecast]) => {
           return (
-            <Grid.Column width={8}>
-              <ForecastCard key={forecast.id} city={city} forecast={forecast} />
+            <Grid.Column width={8} key={forecast.id} data-testid={city}>
+              <ForecastCard city={city} forecast={forecast} />
             </Grid.Column>
           );
         })}

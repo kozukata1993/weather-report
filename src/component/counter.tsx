@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../stores/counter';
 import { Store } from '../interface';
 
+// テスト用のコンポーネント 実際には使わない
 export const Counter: FC = () => {
   const count = useSelector((store: Store) => store.counter.count);
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ export const Counter: FC = () => {
   return (
     <>
       <Header>Counter</Header>
-      <Header>{count}</Header>
+      <Header data-testid="count">{count}</Header>
       <Button
         positive
         content="+"

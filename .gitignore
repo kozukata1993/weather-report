@@ -27,3 +27,4 @@ todoList.md
 
 *debug.log
 .env
+.env.test

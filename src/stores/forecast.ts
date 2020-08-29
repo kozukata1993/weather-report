@@ -1,20 +1,21 @@
 import { createSlice, Dispatch } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 import { getForecast } from '../firebase/firestore';
 
-const initialForecast = {
-  id: '0',
+const initialForecast = () => ({
+  id: uuidv4(),
   date: new Date(),
   summary: '',
   temperatureMax: 0,
   temperatureMin: 0,
   icon: 'question',
-};
+});
 
-const initialState = {
-  tokyo: initialForecast,
-  osaka: initialForecast,
-  nagoya: initialForecast,
-  morioka: initialForecast,
+export const initialState = {
+  tokyo: initialForecast(),
+  osaka: initialForecast(),
+  nagoya: initialForecast(),
+  morioka: initialForecast(),
 };
 
 const forecastSlice = createSlice({

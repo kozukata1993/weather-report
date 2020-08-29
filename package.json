@@ -4,29 +4,31 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
+    "@types/uuid": "^8.3.0",
     "firebase": "^7.19.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
-    "react-scripts": "3.4.3",
+    "react-scripts": "3.4.0",
     "redux": "^4.0.5",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.2.1",
-    "typescript": "^4.0.2"
+    "typescript": "^4.0.2",
+    "uuid": "^8.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:coverage": "npm run test -- --coverage",
+    "test:c": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "yarn eslint --fix ./src/**/*.tsx",
     "deploy": "npm run build && firebase deploy"
@@ -67,5 +69,12 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "^2.1.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/component/*.{js,jsx,ts,tsx}",
+      "src/**/container/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/"
+    ]
   }
 }
