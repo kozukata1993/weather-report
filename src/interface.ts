@@ -25,4 +25,19 @@ export interface StoreForecast {
 export interface StoreMessage {
   visible: boolean;
   text: string;
+  color:
+    | 'red'
+    | 'orange'
+    | 'yellow'
+    | 'olive'
+    | 'green'
+    | 'teal'
+    | 'blue'
+    | 'violet'
+    | 'purple'
+    | 'pink'
+    | 'brown'
+    | 'grey'
+    | 'black'
+    | undefined;
 }

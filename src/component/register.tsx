@@ -8,7 +8,7 @@ export const Register: React.FC = () => {
   return (
     <>
       <Header>Register</Header>
-      <Button content="Click here" onClick={() => displayMessage('Hooooooooooooo!!')} />
+      <Button content="Click here" onClick={() => displayMessage('Hooooooooooooo!!', 'teal')} />
     </>
   );
 };

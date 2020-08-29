@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   visible: false,
   text: '',
+  color: 'teal',
 };
 
 const messageSlice = createSlice({
@@ -10,7 +11,7 @@ const messageSlice = createSlice({
   initialState,
   reducers: {
     visible: (prevState, { payload }) => {
-      return { visible: true, text: payload.text };
+      return { ...initialState, visible: true, text: payload.text, color: payload.color };
     },
     invisible: () => {
       return initialState;

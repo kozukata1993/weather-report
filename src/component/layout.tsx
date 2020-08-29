@@ -8,7 +8,7 @@ import {
   Button,
   Icon,
   Transition,
-  Header,
+  Label,
 } from 'semantic-ui-react';
 import { StoreMessage } from '../interface';
 
@@ -31,7 +31,7 @@ export const LayoutComponent: React.FC<LayoutProps> = ({ children, currentUser, 
             duration={500}
             className="message"
           >
-            <Header content={message.text} inverted />
+            <Label size="large" color={message.color} pointing="left" content={message.text} />
           </Transition>
         </Menu.Item>
 
