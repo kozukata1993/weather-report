@@ -12,7 +12,7 @@ export const Counter: FC = () => {
   return (
     <>
       <Header>Counter</Header>
-      <Header>{count}</Header>
+      <Header data-testid="count">{count}</Header>
       <Button
         positive
         content="+"

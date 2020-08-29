@@ -1,6 +1,4 @@
 import React from 'react';
-// import userEvent from '@testing-library/user-event';
-// import { render, cleanup, screen } from '@testing-library/react';
 import { render, cleanup, screen } from './test-utils';
 import { ForecastCard } from '../component/forecastCard';
 import { StoreForecast } from '../interface';
@@ -21,13 +19,11 @@ describe('ForecastCard', () => {
     } as StoreForecast;
 
     render(<ForecastCard city={city} forecast={forecast} />);
-    screen.debug();
-    expect(screen.getByText('sendai')).toBeInTheDocument();
-    expect(screen.getByText('雨のち晴れ')).toBeInTheDocument();
-    expect(screen.getByText('最高気温: 25℃')).toBeInTheDocument();
-    expect(screen.getByText('最低気温: 15℃')).toBeInTheDocument();
+    expect(screen.getByTestId('cardHeader')).toContainElement(screen.getByText('Sendai'));
+    expect(screen.getByTestId('cardDescription')).toContainElement(screen.getByText('雨のち晴れ'));
+    expect(screen.getByTestId('temperature')).toContainElement(screen.getByText('最高気温: 25℃'));
+    expect(screen.getByTestId('temperature')).toContainElement(screen.getByText('最低気温: 15℃'));
 
-    // expect(getByText('sendai')).toContainElement();
     // Warning: toBeInTheDOM has been deprecated and will be removed in future updates.
     // Please use toBeInTheDocument for searching the entire document and toContainElement for searching a specific container.
   });
