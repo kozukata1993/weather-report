@@ -1,14 +1,43 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import { Container, Segment, Dropdown, Menu, Button, Transition, Label } from 'semantic-ui-react';
+import {
+  Container,
+  Segment,
+  Dropdown,
+  Menu,
+  Button,
+  Transition,
+  Label,
+  Confirm,
+} from 'semantic-ui-react';
 import { StoreMessage } from '../interface';
 
 interface LayoutProps {
   currentUser: firebase.User | null;
   message: StoreMessage;
+  handleGoogleClick: () => void;
+  handleGuestClick: () => void;
+  handleLogoutClick: () => void;
+  isOpen: boolean;
+  openConfirm: () => void;
+  closeConfirm: () => void;
+  handleConfirmClick: () => void;
+  isLoading: boolean;
 }
 
-export const LayoutComponent: React.FC<LayoutProps> = ({ children, currentUser, message }) => (
+export const LayoutComponent: React.FC<LayoutProps> = ({
+  children,
+  currentUser,
+  message,
+  handleGoogleClick,
+  handleGuestClick,
+  handleLogoutClick,
+  isOpen,
+  openConfirm,
+  closeConfirm,
+  handleConfirmClick,
+  isLoading,
+}) => (
   <>
     <Menu fixed="top" pointing inverted borderless>
       <Container>
@@ -36,39 +65,59 @@ export const LayoutComponent: React.FC<LayoutProps> = ({ children, currentUser, 
           <Dropdown.Menu>
             <Dropdown.Header content={currentUser ? 'ログアウト' : 'ログイン'} />
             {currentUser ? (
-              <Dropdown.Item content={<Button content="ログアウト" color="grey" />} />
+              <Dropdown.Item
+                content={<Button content="ログアウト" color="grey" onClick={handleLogoutClick} />}
+              />
             ) : (
               <>
                 <Dropdown.Item
-                  content={<Button content="Googleアカウントでログイン" color="blue" />}
+                  content={
+                    <Button
+                      content="Googleアカウントでログイン"
+                      color="blue"
+                      onClick={handleGoogleClick}
+                    />
+                  }
                 />
                 <Dropdown.Item
-                  content={<Button content="ゲストアカウントでログイン" color="grey" />}
+                  content={
+                    <Button
+                      content="ゲストアカウントでログイン"
+                      color="grey"
+                      onClick={handleGuestClick}
+                    />
+                  }
                 />
               </>
             )}
-            {/* {currentUser ? (
+            {currentUser ? (
               <>
                 <Dropdown.Divider />
-                <Dropdown.Item>
-                  <i className="dropdown icon" />
-                  <span className="text">Submenu</span>
-                  <Dropdown.Menu>
-                    <Dropdown.Item>List Item</Dropdown.Item>
-                    <Dropdown.Item>List Item</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown.Item>
-                <Dropdown.Item>List Item</Dropdown.Item>
+                <Dropdown.Header content="アカウント削除" />
+                <Dropdown.Item
+                  content={
+                    <Button content="このアカウントを削除" color="red" onClick={openConfirm} />
+                  }
+                />
+                <Confirm
+                  open={isOpen}
+                  onCancel={closeConfirm}
+                  onConfirm={handleConfirmClick}
+                  content="アカウントを削除してよろしいですか？"
+                  cancelButton="Cancel"
+                  confirmButton="Delete"
+                  size="mini"
+                />
               </>
             ) : (
               <></>
-            )} */}
+            )}
           </Dropdown.Menu>
         </Menu.Item>
       </Container>
     </Menu>
     <Container>
-      <Segment basic style={{ paddingTop: '7em' }}>
+      <Segment basic style={{ paddingTop: '7em' }} loading={isLoading}>
         {children}
       </Segment>
     </Container>

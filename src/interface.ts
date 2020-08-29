@@ -4,6 +4,9 @@ export interface Store {
   };
   forecasts: StoreForecasts;
   message: StoreMessage;
+  loading: {
+    isLoading: boolean;
+  };
 }
 
 export interface StoreForecasts {
