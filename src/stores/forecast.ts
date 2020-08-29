@@ -23,8 +23,6 @@ const forecastSlice = createSlice({
   initialState,
   reducers: {
     setForecast: (prevState, action) => {
-      console.log('setForecast', action.payload);
-
       return { ...initialState, ...prevState, ...action.payload };
     },
     resetForecast: () => initialState,
@@ -35,7 +33,7 @@ export const { setForecast, resetForecast } = forecastSlice.actions;
 export const forecastReducer = forecastSlice.reducer;
 
 export const fetchForecast = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch): Promise<void> => {
     const tokyoForecast = await getForecast('tokyo');
     const osakaForecast = await getForecast('osaka');
     const nagoyaForecast = await getForecast('nagoya');
