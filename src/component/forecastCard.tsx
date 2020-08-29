@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Card, Icon, Segment } from 'semantic-ui-react';
 import { StoreForecast } from '../interface';
 
@@ -7,7 +7,7 @@ interface ForecastCardProps {
   forecast: StoreForecast;
 }
 
-export const ForecastCard: FC<ForecastCardProps> = ({ city, forecast }) => {
+export const ForecastCard: React.FC<ForecastCardProps> = ({ city, forecast }) => {
   const captitalizeFirstLetter = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 
   return (
