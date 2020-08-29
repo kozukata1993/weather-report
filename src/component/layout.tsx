@@ -1,15 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import {
-  Container,
-  Segment,
-  Dropdown,
-  Menu,
-  Button,
-  Icon,
-  Transition,
-  Label,
-} from 'semantic-ui-react';
+import { Container, Segment, Dropdown, Menu, Button, Transition, Label } from 'semantic-ui-react';
 import { StoreMessage } from '../interface';
 
 interface LayoutProps {
@@ -35,7 +26,13 @@ export const LayoutComponent: React.FC<LayoutProps> = ({ children, currentUser, 
           </Transition>
         </Menu.Item>
 
-        <Menu.Item as={Dropdown} position="right" item simple text={<Icon name="sidebar" />}>
+        <Menu.Item
+          as={Dropdown}
+          position="right"
+          item
+          simple
+          text={currentUser ? 'Log out' : 'Log in'}
+        >
           <Dropdown.Menu>
             <Dropdown.Header content={currentUser ? 'ログアウト' : 'ログイン'} />
             {currentUser ? (
@@ -50,7 +47,7 @@ export const LayoutComponent: React.FC<LayoutProps> = ({ children, currentUser, 
                 />
               </>
             )}
-            {currentUser ? (
+            {/* {currentUser ? (
               <>
                 <Dropdown.Divider />
                 <Dropdown.Item>
@@ -65,7 +62,7 @@ export const LayoutComponent: React.FC<LayoutProps> = ({ children, currentUser, 
               </>
             ) : (
               <></>
-            )}
+            )} */}
           </Dropdown.Menu>
         </Menu.Item>
       </Container>
