@@ -1,14 +1,14 @@
-import React, { FC, useEffect } from 'react';
+import React from 'react';
 import { Header, Grid } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ForecastCard } from './forecastCard';
 import { fetchForecast } from '../stores/forecast';
 import { Store } from '../interface';
 
-export const Forecast: FC = () => {
+export const Forecast: React.FC = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(fetchForecast());
   }, [dispatch]);
   const forecasts = useSelector((store: Store) => store.forecasts);
