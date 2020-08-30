@@ -29,8 +29,6 @@ export const RegisterComponent: React.FC<RegisterProps> = ({
   closeModal,
   isOpen,
 }) => {
-  console.log(notices);
-
   return (
     <>
       <Header>Register</Header>

@@ -33,7 +33,6 @@ export const notice = (hour: string, num: number) =>
             const { summary, temperatureMax, temperatureMin } = forecasts[
               cities.indexOf(notice.data().city)
             ];
-            console.log(notice.data().city);
             return {
               city: notice.data().city,
               webhookUrl: notice.data().webhookUrl,
@@ -42,8 +41,6 @@ export const notice = (hour: string, num: number) =>
               temperatureMin,
             };
           });
-
-        console.log(targetNotices);
 
         if (targetNotices.length !== 0) {
           targetNotices.forEach(
