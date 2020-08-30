@@ -1,13 +1,24 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { InputOnChangeData, DropdownProps } from 'semantic-ui-react';
-import { RegisterComponent } from '../component/register';
+import { RegisterComponent } from '../component/register/register';
 import { useMessage } from '../customHooks/useMessage';
 import { registerNotice } from '../firebase/firestore';
+import { fetchNotices } from '../stores/notice';
+import { Store } from '../interface';
 
 export const Register: React.FC = () => {
   const [city, setCity] = React.useState<string | null>(null);
   const [time, setTime] = React.useState<number | null>(null);
   const [webhookUrl, setWebhookUrl] = React.useState<string>('');
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchNotices());
+  }, [dispatch]);
+  const notices = useSelector((store: Store) => store.notices);
 
   const displayMessage = useMessage();
   const isDisabled = !(city && time && webhookUrl.match(/https:\/\/hooks.slack.com\/[\w/]*/));
@@ -32,6 +43,7 @@ export const Register: React.FC = () => {
     if (city && time && webhookUrl) {
       await registerNotice(city, time, webhookUrl);
       setWebhookUrl('');
+      setIsOpen(false);
       displayMessage('通知設定を登録しました', 'blue');
 
       return;
@@ -39,14 +51,26 @@ export const Register: React.FC = () => {
     displayMessage('ERROR', 'red');
   };
 
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <RegisterComponent
+      notices={notices}
       handleChangeCity={handleChangeCity}
       handleChangeTime={handleChangeTime}
       handleChangeWebhookUrl={handleChangeWebhookUrl}
       handleClick={handleClick}
       webhookUrl={webhookUrl}
       isDisabled={isDisabled}
+      openModal={openModal}
+      closeModal={closeModal}
+      isOpen={isOpen}
     />
   );
 };

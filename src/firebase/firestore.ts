@@ -1,5 +1,5 @@
 import { firestore, auth } from './index';
-import { StoreForecast } from '../interface';
+import { StoreForecast, StoreNotice } from '../interface';
 
 export const getForecast = async (city: string): Promise<StoreForecast> => {
   const forecasts = await firestore()
@@ -34,12 +34,44 @@ export const getForecast = async (city: string): Promise<StoreForecast> => {
   return latestForecast;
 };
 
+export const getNotices = async (): Promise<StoreNotice[]> => {
+  const { currentUser } = auth();
+  const querySnapshot = await firestore()
+    .collection('users')
+    .doc(`${currentUser?.uid}`)
+    .collection('notice')
+    .orderBy('createdAt', 'desc')
+    .get()
+    .catch((error) => {
+      console.log(error);
+    });
+
+  const notices = querySnapshot
+    ? querySnapshot.docs.map((notice) => ({
+        id: notice.id,
+        city: notice.data().city,
+        time: notice.data().time,
+        webhookUrl: notice.data().webhookUrl,
+        createdAt: notice.data().createdAt.toDate(),
+      }))
+    : [
+        {
+          id: '0',
+          city: 'tokyo',
+          time: 6,
+          webhookUrl: '',
+          createdAt: new Date(),
+        },
+      ];
+
+  return notices;
+};
+
 export const registerNotice = async (
   city: string,
   time: number,
   webhookUrl: string,
 ): Promise<void> => {
-  console.log('START');
   const { currentUser } = auth();
   await firestore()
     .collection('users')
