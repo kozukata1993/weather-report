@@ -10,6 +10,7 @@ export const Register: React.FC = () => {
   const [webhookUrl, setWebhookUrl] = React.useState<string>('');
 
   const displayMessage = useMessage();
+  const isDisabled = !(city && time && webhookUrl.match(/https:\/\/hooks.slack.com\/[\w/]*/));
 
   const handleChangeCity = (e: React.FormEvent, { value }: DropdownProps) => {
     if (typeof value === 'string') {
@@ -45,6 +46,7 @@ export const Register: React.FC = () => {
       handleChangeWebhookUrl={handleChangeWebhookUrl}
       handleClick={handleClick}
       webhookUrl={webhookUrl}
+      isDisabled={isDisabled}
     />
   );
 };

@@ -2,7 +2,7 @@
 import * as admin from 'firebase-admin';
 // import axios from 'axios';
 // import { getForecast } from './forecast';
-import { notice } from './noticeAt6';
+import { notice } from './notice';
 
 admin.initializeApp();
 // export const testFunc = functions

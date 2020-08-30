@@ -7,6 +7,7 @@ interface RegisterProps {
   handleChangeWebhookUrl: (e: React.FormEvent, { value }: InputOnChangeData) => void;
   handleClick: () => Promise<void>;
   webhookUrl: string;
+  isDisabled: boolean;
 }
 
 export const RegisterComponent: React.FC<RegisterProps> = ({
@@ -15,6 +16,7 @@ export const RegisterComponent: React.FC<RegisterProps> = ({
   handleChangeWebhookUrl,
   handleClick,
   webhookUrl,
+  isDisabled,
 }) => {
   const cityOptions = [
     { key: 'tokyo', text: '東京', value: 'tokyo' },
@@ -57,7 +59,7 @@ export const RegisterComponent: React.FC<RegisterProps> = ({
             onChange={handleChangeWebhookUrl}
             value={webhookUrl}
           />
-          <Form.Button color="instagram" onClick={handleClick}>
+          <Form.Button color="instagram" onClick={handleClick} disabled={isDisabled}>
             登録
           </Form.Button>
         </Form>
