@@ -1,52 +1,73 @@
-import * as functions from 'firebase-functions';
+// import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import * as axios from 'axios';
-import { cities } from './cities';
-import { generateIcon } from './utils';
+// import axios from 'axios';
+// import { getForecast } from './forecast';
+import { notice } from './notice';
 
 admin.initializeApp();
-export const testFuc = functions
-  .region('asia-northeast1')
-  .https.onRequest(async (request, response) => {
-    console.log('------------- START -------------');
+// export const testFunc = functions
+//   .region('asia-northeast1')
+//   .https.onRequest(async (request, response) => {
+//     console.log('--------- START ---------');
+//     const forecasts = [
+//       await getForecast('tokyo'),
+//       await getForecast('osaka'),
+//       await getForecast('nagoya'),
+//       await getForecast('morioka'),
+//     ];
+//     const cities = ['tokyo', 'osaka', 'nagoya', 'morioka'];
 
-    cities.forEach(async (city) => {
-      const latitude = city.latitude;
-      const longitude = city.longitude;
-      const queryParams = '?lang=ja&units=si&exclude=currently,minutely,alerts,flags';
-      const url = `${functions.config().darksky.url}${latitude},${longitude}${queryParams}`;
+//     const querySnapshot = await admin.firestore().collection('users').get();
 
-      const res = await axios.default.get(url).catch((error) => {
-        console.log(error);
-      });
+//     const uids = querySnapshot.docs.map((doc) => doc.data().uid);
+//     console.log('userIds: ', uids);
 
-      if (res) {
-        const icon = generateIcon(res.data.hourly.icon);
-        await admin
-          .firestore()
-          .collection('cities')
-          .doc(`${city.name}`)
-          .collection('forecast')
-          .add({
-            date: admin.firestore.FieldValue.serverTimestamp(),
-            summary: res.data.hourly.summary,
-            temperatureMax: res.data.daily.data[0].temperatureMax,
-            temperatureMin: res.data.daily.data[0].temperatureMin,
-            icon: icon,
-          });
+//     uids.forEach(async (uid) => {
+//       const notices = await admin
+//         .firestore()
+//         .collection('users')
+//         .doc(uid)
+//         .collection('notice')
+//         .get();
 
-        response.send({
-          date: admin.firestore.FieldValue.serverTimestamp(),
-          summary: res.data.hourly.summary,
-          temperatureMax: res.data.daily.data[0].temperatureMax,
-          temperatureMin: res.data.daily.data[0].temperatureMin,
-          icon: icon,
-        });
-      }
-      response.send('no res');
-    });
+//       const targetNotices = notices.docs
+//         .filter((notice) => notice.data().time === 6)
+//         .map((notice) => {
+//           const { summary, temperatureMax, temperatureMin } = forecasts[
+//             cities.indexOf(notice.data().city)
+//           ];
+//           console.log(notice.data().city);
+//           return {
+//             city: notice.data().city,
+//             webhookUrl: notice.data().webhookUrl,
+//             summary,
+//             temperatureMax,
+//             temperatureMin,
+//           };
+//         });
 
-    console.log('------------- FINISH -------------');
-  });
+//       console.log(targetNotices);
+
+//       if (targetNotices.length !== 0) {
+//         console.log('--------- axios START ---------');
+//         targetNotices.forEach(
+//           async ({ city, webhookUrl, summary, temperatureMax, temperatureMin }) => {
+//             const cityName = ['東京都', '大阪市', '名古屋市', '盛岡市'][cities.indexOf(city)];
+//             const text = `${cityName}の天気, ${summary}, 最高気温は${temperatureMax}℃, 最低気温は${temperatureMin}℃`;
+//             await axios.post(webhookUrl, JSON.stringify({ text })).catch((error) => {
+//               console.log(error);
+//             });
+//           },
+//         );
+//       }
+//     });
+//     console.log('--------- FINISH ---------');
+
+//     response.send('Finish');
+//   });
 
 export { forecast } from './forecast';
+export { onCreateUser, onDeleteUser } from './auth';
+export const noticeAt6 = notice('06', 6);
+export const noticeAt7 = notice('07', 7);
+export const noticeAt8 = notice('08', 8);

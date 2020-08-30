@@ -36,3 +36,31 @@ export const forecast = functions
       }
     });
   });
+
+export const getForecast = async (city: string) => {
+  const forecasts = await admin
+    .firestore()
+    .collection('cities')
+    .doc(`${city}`)
+    .collection('forecast')
+    .orderBy('date', 'desc')
+    .limit(1)
+    .get()
+    .catch((error) => {
+      console.log(error);
+    });
+
+  const latestForecast = forecasts
+    ? forecasts.docs.map((forecast) => ({
+        summary: forecast.data().summary,
+        temperatureMax: forecast.data().temperatureMax,
+        temperatureMin: forecast.data().temperatureMin,
+      }))[0]
+    : {
+        summary: 'ERROR',
+        temperatureMax: 0,
+        temperatureMin: 0,
+      };
+
+  return latestForecast;
+};
