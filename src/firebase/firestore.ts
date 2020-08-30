@@ -1,4 +1,4 @@
-import { firestore } from './index';
+import { firestore, auth } from './index';
 import { StoreForecast } from '../interface';
 
 export const getForecast = async (city: string): Promise<StoreForecast> => {
@@ -32,4 +32,56 @@ export const getForecast = async (city: string): Promise<StoreForecast> => {
       };
 
   return latestForecast;
+};
+
+export const registerNotice = async (
+  city: string,
+  time: number,
+  webhookUrl: string,
+): Promise<void> => {
+  console.log('START');
+  const { currentUser } = auth();
+  await firestore()
+    .collection('users')
+    .doc(`${currentUser?.uid}`)
+    .collection('notice')
+    .add({ createdAt: firestore.FieldValue.serverTimestamp(), city, time, webhookUrl })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const updateNotice = async (
+  id: string,
+  city: string,
+  time: number,
+  webhookUrl: string,
+): Promise<void> => {
+  const { currentUser } = auth();
+  await firestore()
+    .collection('users')
+    .doc(`${currentUser?.uid}`)
+    .collection('notice')
+    .doc(id)
+    .update({
+      city,
+      time,
+      webhookUrl,
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const deleteNotice = async (id: string): Promise<void> => {
+  const { currentUser } = auth();
+  await firestore()
+    .collection('users')
+    .doc(`${currentUser?.uid}`)
+    .collection('notice')
+    .doc(id)
+    .delete()
+    .catch((error) => {
+      console.log(error);
+    });
 };

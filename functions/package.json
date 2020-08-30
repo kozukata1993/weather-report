@@ -2,6 +2,7 @@
   "name": "functions",
   "scripts": {
     "build": "tsc",
+    "emu:firebase": "npm run build && firebase emulators:start",
     "emu:functions": "npm run build && firebase emulators:start --only functions",
     "emu:firestore": "npm run build && firebase emulators:start --only firestore",
     "shell": "npm run build && firebase functions:shell",

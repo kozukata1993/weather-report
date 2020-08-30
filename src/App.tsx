@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import { Register } from './component/register';
+import { Helmet } from 'react-helmet';
+import { Register } from './container/register';
 import { Forecast } from './component/forecast';
 import { Layout } from './container/layout';
 import { useAuth } from './customHooks/useAuth';
@@ -10,6 +11,9 @@ const App: React.FC = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Weather Report</title>
+      </Helmet>
       {currentUser ? (
         <Grid columns={2}>
           <Grid.Column width={10}>
