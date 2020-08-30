@@ -7,6 +7,7 @@ export interface Store {
   loading: {
     isLoading: boolean;
   };
+  notices: StoreNotice[] | null;
 }
 
 export interface StoreForecasts {
@@ -43,4 +44,12 @@ export interface StoreMessage {
     | 'grey'
     | 'black'
     | undefined;
+}
+
+export interface StoreNotice {
+  id: string;
+  city: string;
+  time: number;
+  webhookUrl: string;
+  createdAt: Date;
 }

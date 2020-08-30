@@ -1,22 +1,28 @@
 import React from 'react';
-import { Header, Form, Segment, DropdownProps, InputOnChangeData } from 'semantic-ui-react';
+import { Form, Button, Modal, DropdownProps, InputOnChangeData } from 'semantic-ui-react';
 
-interface RegisterProps {
+interface RegisterModalProps {
   handleChangeCity: (e: React.FormEvent, { value }: DropdownProps) => void;
   handleChangeTime: (e: React.FormEvent, { value }: DropdownProps) => void;
   handleChangeWebhookUrl: (e: React.FormEvent, { value }: InputOnChangeData) => void;
   handleClick: () => Promise<void>;
   webhookUrl: string;
   isDisabled: boolean;
+  openModal: () => void;
+  closeModal: () => void;
+  isOpen: boolean;
 }
 
-export const RegisterComponent: React.FC<RegisterProps> = ({
+export const RegisterModal: React.FC<RegisterModalProps> = ({
   handleChangeCity,
   handleChangeTime,
   handleChangeWebhookUrl,
   handleClick,
   webhookUrl,
   isDisabled,
+  openModal,
+  closeModal,
+  isOpen,
 }) => {
   const cityOptions = [
     { key: 'tokyo', text: '東京', value: 'tokyo' },
@@ -32,9 +38,14 @@ export const RegisterComponent: React.FC<RegisterProps> = ({
   ];
 
   return (
-    <>
-      <Header>Register</Header>
-      <Segment>
+    <Modal
+      onClose={closeModal}
+      onOpen={openModal}
+      open={isOpen}
+      trigger={<Button circular content="新しい通知設定を作る" color="blue" />}
+    >
+      <Modal.Header>通知設定</Modal.Header>
+      <Modal.Content>
         <Form>
           <Form.Group widths="equal">
             <Form.Select
@@ -59,11 +70,11 @@ export const RegisterComponent: React.FC<RegisterProps> = ({
             onChange={handleChangeWebhookUrl}
             value={webhookUrl}
           />
-          <Form.Button color="instagram" onClick={handleClick} disabled={isDisabled}>
+          <Form.Button color="blue" circular onClick={handleClick} disabled={isDisabled}>
             登録
           </Form.Button>
         </Form>
-      </Segment>
-    </>
+      </Modal.Content>
+    </Modal>
   );
 };
