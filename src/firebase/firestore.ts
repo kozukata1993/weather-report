@@ -52,7 +52,9 @@ export const getNotices = async (): Promise<StoreNotice[]> => {
         city: notice.data().city,
         time: notice.data().time,
         webhookUrl: notice.data().webhookUrl,
-        createdAt: notice.data().createdAt.toDate(),
+        createdAt: notice.data().createdAt
+          ? notice.data().createdAt.toDate()
+          : new Date(2020, 1, 1),
       }))
     : [
         {

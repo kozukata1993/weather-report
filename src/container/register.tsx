@@ -1,10 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { InputOnChangeData, DropdownProps } from 'semantic-ui-react';
 import { RegisterComponent } from '../component/register/register';
 import { useMessage } from '../customHooks/useMessage';
 import { registerNotice } from '../firebase/firestore';
-import { fetchNotices } from '../stores/notice';
 import { Store } from '../interface';
 
 export const Register: React.FC = () => {
@@ -13,11 +12,6 @@ export const Register: React.FC = () => {
   const [webhookUrl, setWebhookUrl] = React.useState<string>('');
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(fetchNotices());
-  }, [dispatch]);
   const notices = useSelector((store: Store) => store.notices);
 
   const displayMessage = useMessage();
