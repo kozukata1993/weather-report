@@ -35,9 +35,6 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
     return { key: n, text: `${n}:00`, value: n };
   });
 
-  // { key: 6, text: 'AM 6:00', value: 6 },
-  // { key: 7, text: 'AM 7:00', value: 7 },
-  // { key: 8, text: 'AM 8:00', value: 8 },
   return (
     <Modal
       onClose={closeModal}
