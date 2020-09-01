@@ -74,6 +74,7 @@ export const registerNotice = async (
   time: number,
   webhookUrl: string,
 ): Promise<void> => {
+  console.log('hello');
   const { currentUser } = auth();
   await firestore()
     .collection('users')

@@ -19,7 +19,7 @@ export const NoticeCardComponent: React.FC<NoticeCardProps> = ({
   closeConfirm,
 }) => {
   const displayTime = (time: number) => {
-    return ['6:00', '7:00', '8:00'][[6, 7, 8].indexOf(time)];
+    return [...Array(24).keys()].map((n) => `${n}:00`)[[...Array(24).keys()].indexOf(time)];
   };
 
   const cityName = (city: string) => {

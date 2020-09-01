@@ -31,12 +31,13 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
     { key: 'morioka', text: '盛岡', value: 'morioka' },
   ];
 
-  const noticeOptions = [
-    { key: 6, text: 'AM 6:00', value: 6 },
-    { key: 7, text: 'AM 7:00', value: 7 },
-    { key: 8, text: 'AM 8:00', value: 8 },
-  ];
+  const noticeOptions = [...Array(24).keys()].map((n) => {
+    return { key: n, text: `${n}:00`, value: n };
+  });
 
+  // { key: 6, text: 'AM 6:00', value: 6 },
+  // { key: 7, text: 'AM 7:00', value: 7 },
+  // { key: 8, text: 'AM 8:00', value: 8 },
   return (
     <Modal
       onClose={closeModal}

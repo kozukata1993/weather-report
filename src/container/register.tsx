@@ -15,7 +15,11 @@ export const Register: React.FC = () => {
   const notices = useSelector((store: Store) => store.notices);
 
   const displayMessage = useMessage();
-  const isDisabled = !(city && time && webhookUrl.match(/https:\/\/hooks.slack.com\/[\w/]*/));
+  const isDisabled = !(
+    city &&
+    (time || time === 0) &&
+    webhookUrl.match(/https:\/\/hooks.slack.com\/[\w/]*/)
+  );
 
   const handleChangeCity = (e: React.FormEvent, { value }: DropdownProps) => {
     if (typeof value === 'string') {
@@ -34,7 +38,7 @@ export const Register: React.FC = () => {
   };
 
   const handleClick = async () => {
-    if (city && time && webhookUrl) {
+    if (city && (time || time === 0) && webhookUrl) {
       await registerNotice(city, time, webhookUrl);
       setWebhookUrl('');
       setIsOpen(false);
