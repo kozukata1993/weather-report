@@ -17,6 +17,5 @@ describe('Counter', () => {
     render(<Counter />);
     userEvent.click(screen.getByText('-'));
     expect(screen.getByTestId('count')).toHaveTextContent('0');
-    screen.debug();
   });
 });
