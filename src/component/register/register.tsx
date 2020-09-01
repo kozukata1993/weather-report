@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, DropdownProps, InputOnChangeData } from 'semantic-ui-react';
 import { RegisterModal } from './registerModal';
-import { NoticeCard } from './noticeCard';
+import { NoticeCard } from '../../container/noticeCard';
 import { StoreNotice } from '../../interface';
 
 interface RegisterProps {
