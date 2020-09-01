@@ -1,16 +1,23 @@
 import React from 'react';
 import { Button, Card, Label, List, Confirm } from 'semantic-ui-react';
 import dayjs from 'dayjs';
-import { deleteNotice } from '../../firebase/firestore';
-import { useMessage } from '../../customHooks/useMessage';
 import { StoreNotice } from '../../interface';
 
 interface NoticeCardProps {
   notice: StoreNotice;
+  isOpen: boolean;
+  handleConfirmClick: () => Promise<void>;
+  openConfirm: () => void;
+  closeConfirm: () => void;
 }
 
-export const NoticeCard: React.FC<NoticeCardProps> = ({ notice }) => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+export const NoticeCardComponent: React.FC<NoticeCardProps> = ({
+  notice,
+  isOpen,
+  handleConfirmClick,
+  openConfirm,
+  closeConfirm,
+}) => {
   const displayTime = (time: number) => {
     return ['6:00', '7:00', '8:00'][[6, 7, 8].indexOf(time)];
   };
@@ -23,13 +30,6 @@ export const NoticeCard: React.FC<NoticeCardProps> = ({ notice }) => {
 
   const displayWebhookUrl = (url: string) => {
     return url.length > 40 ? `${url.substr(0, 27)}...${url.substr(-10)}` : url;
-  };
-
-  const displayMessage = useMessage();
-  const handleConfirmClick = async () => {
-    await deleteNotice(notice.id);
-    setIsOpen(false);
-    displayMessage('通知を削除しました', 'red');
   };
 
   return (
@@ -56,19 +56,12 @@ export const NoticeCard: React.FC<NoticeCardProps> = ({ notice }) => {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button
-            circular
-            basic
-            color="red"
-            content="削除"
-            size="tiny"
-            onClick={() => setIsOpen(true)}
-          />
+          <Button circular basic color="red" content="削除" size="tiny" onClick={openConfirm} />
         </Card.Content>
       </Card>
       <Confirm
         open={isOpen}
-        onCancel={() => setIsOpen(false)}
+        onCancel={closeConfirm}
         onConfirm={handleConfirmClick}
         content="この通知を削除してよろしいですか？"
         cancelButton="Cancel"
