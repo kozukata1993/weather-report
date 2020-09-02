@@ -13,7 +13,7 @@ describe('Register', () => {
     expect(screen.getByRole('link')).toHaveTextContent('SlackのIncoming Webhook');
   });
 
-  it('click', () => {
+  it('click', async () => {
     render(<Register />);
 
     const options = [
@@ -31,7 +31,15 @@ describe('Register', () => {
 
     expect(screen.getAllByRole('button')[1]).toHaveTextContent('登録');
     expect(screen.getAllByRole('button')[1]).toBeDisabled();
-    userEvent.selectOptions(screen.getAllByRole('listbox')[0], '東京');
-    screen.debug();
+    // userEvent.selectOptions(screen.getAllByRole('listbox')[0], '東京');
+    // expect(screen.getAllByRole('button')[1]).toBeDisabled();
+    // userEvent.selectOptions(screen.getAllByRole('listbox')[1], '7:00');
+    // expect(screen.getAllByRole('button')[1]).toBeDisabled();
+    // userEvent.type(
+    //   screen.getByPlaceholderText('Webhook URL'),
+    //   'https://hooks.slack.com/services/FOOBAR',
+    // );
+    // expect(await screen.findByRole('button')).toBeEnabled();
+    // screen.debug();
   });
 });

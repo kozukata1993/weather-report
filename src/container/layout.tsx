@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { LayoutComponent } from '../component/layout';
+import { LayoutComponent } from '../components/layout';
 import { useAuth } from '../customHooks/useAuth';
 import { useMessage } from '../customHooks/useMessage';
 import { loginWithGoogleAccount, loginAnonymously, logout, deleteUser } from '../firebase/auth';

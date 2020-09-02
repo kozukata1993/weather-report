@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup, screen } from './test-utils';
-import { ForecastCard } from '../component/forecastCard';
+import { ForecastCard } from '../components/forecastCard';
 import { StoreForecast } from '../interface';
 import '@testing-library/jest-dom';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { Helmet } from 'react-helmet';
 import { Register } from './container/register';
-import { Forecast } from './component/forecast';
+import { Forecast } from './components/forecast';
 import { Layout } from './container/layout';
 import { useAuth } from './customHooks/useAuth';
 
