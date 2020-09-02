@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup, screen } from './test-utils';
-import { Forecast } from '../component/forecast';
+import { Forecast } from '../components/forecast';
 import '@testing-library/jest-dom';
 
 afterEach(cleanup);

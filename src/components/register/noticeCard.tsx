@@ -36,8 +36,11 @@ export const NoticeCardComponent: React.FC<NoticeCardProps> = ({
     <>
       <Card fluid>
         <Card.Content>
-          <Card.Header content={notice.city} />
-          <Card.Meta content={`登録日: ${dayjs(notice.createdAt).format('YYYY/M/D')}`} />
+          <Card.Header content={notice.city} data-testid="city" />
+          <Card.Meta
+            content={`登録日: ${dayjs(notice.createdAt).format('YYYY/M/D')}`}
+            data-testid="createdAt"
+          />
           <Card.Description>
             <List divided>
               <List.Item>
@@ -67,6 +70,7 @@ export const NoticeCardComponent: React.FC<NoticeCardProps> = ({
         cancelButton="Cancel"
         confirmButton="Delete"
         size="mini"
+        data-testid="confirm"
       />
     </>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoticeCardComponent } from '../component/register/noticeCard';
+import { NoticeCardComponent } from '../components/register/noticeCard';
 import { deleteNotice } from '../firebase/firestore';
 import { useMessage } from '../customHooks/useMessage';
 import { StoreNotice } from '../interface';

@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render, cleanup, screen } from './test-utils';
-import { Counter } from '../component/counter';
+import { Counter } from '../components/counter';
 import '@testing-library/jest-dom';
 
 afterEach(cleanup);

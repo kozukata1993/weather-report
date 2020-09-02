@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { InputOnChangeData, DropdownProps } from 'semantic-ui-react';
-import { RegisterComponent } from '../component/register/register';
+import { RegisterComponent } from '../components/register/register';
 import { useMessage } from '../customHooks/useMessage';
 import { registerNotice } from '../firebase/firestore';
 import { Store } from '../interface';
