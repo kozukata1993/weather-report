@@ -28,6 +28,5 @@ describe('first test', () => {
     expect(screen.getByTestId('confirm')).toHaveTextContent('この通知を削除してよろしいですか？');
     userEvent.click(screen.getAllByRole('button')[1]);
     expect(screen.queryByTestId('confirm')).toBeNull();
-    screen.debug();
   });
 });

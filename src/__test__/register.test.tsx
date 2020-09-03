@@ -30,16 +30,15 @@ describe('Register', () => {
     });
 
     expect(screen.getAllByRole('button')[1]).toHaveTextContent('登録');
-    expect(screen.getAllByRole('button')[1]).toBeDisabled();
-    // userEvent.selectOptions(screen.getAllByRole('listbox')[0], '東京');
+    // userEvent.selectOptions(screen.getAllByRole('option')[0], '東京');
     // expect(screen.getAllByRole('button')[1]).toBeDisabled();
-    // userEvent.selectOptions(screen.getAllByRole('listbox')[1], '7:00');
+    // userEvent.selectOptions(screen.getAllByRole('option')[11], '7:00');
     // expect(screen.getAllByRole('button')[1]).toBeDisabled();
-    // userEvent.type(
+    // await userEvent.type(
     //   screen.getByPlaceholderText('Webhook URL'),
     //   'https://hooks.slack.com/services/FOOBAR',
     // );
-    // expect(await screen.findByRole('button')).toBeEnabled();
+    // expect(screen.findAllByRole('button')[1]).toBeEnabled();
     // screen.debug();
   });
 });
